@@ -1,7 +1,5 @@
 package ru.stqa.pft.adressbook.appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
@@ -12,17 +10,7 @@ public class ApplicationManager {
 
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
-  //metoda final oznacza że w to pola może przypisać wartość tylko jeden jedyny raz
   private GroupHelper groupHelper;
-
-  public static boolean isAlertPresent(FirefoxDriver wd) {
-    try {
-      wd.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
 
   public void init() {
     //wd = new FirefoxDriver();

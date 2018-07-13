@@ -3,18 +3,17 @@ package ru.stqa.pft.adressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class NavigationHelper {
-  private FirefoxDriver wd; //wd musi byc w private
+public class NavigationHelper extends HelperBase {
 
   public NavigationHelper(FirefoxDriver wd){
-    this.wd=wd;
+    super(wd);
   }
 
   public void  gotoGroupPage() {
-    wd.findElement(By.linkText("groups")).click();
+    click("groups");
   }
 
   public void gotoGroupCreation() {
-    wd.findElement(By.linkText("groups")).click();
+    click("groups");
   }
 }
