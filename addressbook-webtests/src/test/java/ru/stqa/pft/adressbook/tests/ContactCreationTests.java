@@ -1,4 +1,4 @@
-package ru.stqa.pft.adressbook;
+package ru.stqa.pft.adressbook.tests;
 
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.BeforeMethod;
@@ -9,6 +9,10 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.*;
+import ru.stqa.pft.adressbook.model.contact.ContactAddressData;
+import ru.stqa.pft.adressbook.model.contact.ContactEmailData;
+import ru.stqa.pft.adressbook.model.contact.ContactNameData;
+import ru.stqa.pft.adressbook.model.contact.ContactTelephoneData;
 
 public class ContactCreationTests {
     FirefoxDriver wd;
