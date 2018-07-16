@@ -35,7 +35,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void submitContactCreation() {
-    click("//div[@id='content']/form/input[21]");
+    click(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
 
