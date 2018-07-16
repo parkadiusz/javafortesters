@@ -21,7 +21,7 @@ public class ContactTelephoneData {
     return tel2;
   }
 
-  public String getTele3() {
+  public String getTel3() {
     return tele3;
   }
 

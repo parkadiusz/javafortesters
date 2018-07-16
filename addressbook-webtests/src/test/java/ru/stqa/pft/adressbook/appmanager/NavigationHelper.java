@@ -1,6 +1,5 @@
 package ru.stqa.pft.adressbook.appmanager;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class NavigationHelper extends HelperBase {
@@ -16,4 +15,13 @@ public class NavigationHelper extends HelperBase {
   public void gotoGroupCreation() {
     click("groups");
   }
+
+  public void gotoContactCreation(){
+    click("add new");
+  }
+
+  public void returnToHomePage(){
+    click("home page");
+  }
 }
+
