@@ -9,6 +9,7 @@ import ru.stqa.pft.adressbook.model.contact.ContactTelephoneData;
 
 public class ContactHelper extends HelperBase {
 
+
   public ContactHelper(FirefoxDriver wd) {
     super(wd); //zwrócenie do konstruktora w HeleprBase
   }
@@ -45,5 +46,14 @@ public class ContactHelper extends HelperBase {
 
   public void submitContactModyfication() {
     click(By.name("update"));
+  }
+
+  public void selectContact(){
+    click(By.name("selected[]"));
+  }
+
+  public void initContactDeletion() {
+    click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+    wd.switchTo().alert().accept();
   }
 }
