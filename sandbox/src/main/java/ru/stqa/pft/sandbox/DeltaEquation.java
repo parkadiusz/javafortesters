@@ -8,7 +8,7 @@ public class DeltaEquation {
 
   public int n;
 
-
+//constructor
   public DeltaEquation(double a, double b, double c) {
 
     this.a = a;
@@ -27,6 +27,7 @@ public class DeltaEquation {
         }
       }
     }
+    //methof
       public int rootNumber(){
         return n;
       }
