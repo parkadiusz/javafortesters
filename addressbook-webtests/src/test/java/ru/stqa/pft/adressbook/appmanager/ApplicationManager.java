@@ -3,9 +3,11 @@ package ru.stqa.pft.adressbook.appmanager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+//import sun.plugin2.util.BrowserType;
 import org.openqa.selenium.remote.BrowserType;
 
 import java.util.concurrent.TimeUnit;
@@ -34,8 +36,10 @@ public class ApplicationManager {
     if(browser==BrowserType.FIREFOX){
       wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
     } else if(browser==BrowserType.CHROME){
-      wd = new ChromeDriver(new ChromeDriver().setFileDetector("C://Users//arkadius.p//Desktop//java//chromedriver.exe"));
+      System.setProperty("webdriver.chrome.driver", "C://Users//arkadius.p//Desktop//java//chromedriver.exe");
+      wd = new ChromeDriver();//new ChromeOptions().setBinary("C://Users//arkadius.p//Desktop//java//chromedriver.exe"));
     } else if(browser==BrowserType.IE){
+      System.setProperty("webdriver.ie.driver", "C://Users//arkadius.p//Desktop//java//IEDriverServer.exe");
       wd = new InternetExplorerDriver();
     }
 
