@@ -1,8 +1,10 @@
 package ru.stqa.pft.adressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.adressbook.model.contact.ContactAddressData;
 import ru.stqa.pft.adressbook.model.contact.ContactEmailData;
 import ru.stqa.pft.adressbook.model.contact.ContactNameData;
@@ -15,10 +17,18 @@ public class ContactHelper extends HelperBase {
     super(wd); //zwrócenie do konstruktora w HeleprBase
   }
 
-  public void fillContactNameForm(ContactNameData contactNameData) {
-    type(By.name("firstname"),contactNameData.getName());
+  //true jeżeli ma być dropdown
+  public void fillContactNameForm(ContactNameData contactNameData, boolean creation) {
+    type(By.name("firstname"), contactNameData.getName());
     type(By.name("lastname"), contactNameData.getLastName());
+
+    if (creation) { //creation true or false
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactNameData.getGroup());
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));//sprawdza czy dropdown jest widoczny jeżeli nie jest to ma być nie widoczny
+    }
   }
+
   public void fillContactAddressForm(ContactAddressData contactAddressData) {
     type(By.name("address"), contactAddressData.getAddress());
   }
