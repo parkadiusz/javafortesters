@@ -5,6 +5,9 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class HelperBase {
   protected WebDriver wd;
@@ -44,5 +47,15 @@ public class HelperBase {
     } catch (NoSuchElementException ex) {
       return false;
     }
+  }
+
+  public void waitTillDisplayed(By element, int timeout){
+    WebDriverWait wait = new WebDriverWait(wd, timeout);
+    wait.until(visibilityOfElementLocated(element));
+  }
+
+  public void waitForClick(By element, int timeout){
+    waitTillDisplayed(element,timeout);
+    click(element);
   }
 }

@@ -3,6 +3,11 @@ package ru.stqa.pft.adressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class NavigationHelper extends HelperBase {
 
@@ -11,15 +16,20 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void gotoGroupPage() {
-    click(By.linkText("groups"));
+    waitForClick(By.linkText("groups"),5);
+  //waitTillDisplayed(By.name("new"), 15);
+    //click(By.linkText("groups"));
   }
 
   public void gotoContactCreation(){
-   click(By.linkText("add new"));
+    waitForClick(By.linkText("add new"),5);
+   //click(By.linkText("add new"));
   }
 
   public void gotoHomePage(){
-    click(By.linkText("home"));
+    waitForClick(By.linkText("home"), 5);
+    //click(By.linkText("home"));
   }
+
 }
 
