@@ -18,11 +18,11 @@ public class ContactHelper extends HelperBase {
   }
 
   //true jeżeli ma być dropdown
-  public void fillContactNameForm(ContactNameData contactNameData, boolean creation) {
+  public void fillContactNameForm(ContactNameData contactNameData) {
     type(By.name("firstname"), contactNameData.getName());
     type(By.name("lastname"), contactNameData.getLastName());
 
-    if (creation) { //creation true or false
+    if (contactNameData.getCreation()) { //creation true or false
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactNameData.getGroup());
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));//sprawdza czy dropdown jest widoczny jeżeli nie jest to ma być nie widoczny
@@ -68,7 +68,16 @@ public class ContactHelper extends HelperBase {
     wd.switchTo().alert().accept();
   }
 
-  public void createContact() {
+  public void createContact(ContactNameData name, ContactAddressData address, ContactTelephoneData telephone, ContactEmailData email) {
+    fillContactNameForm(name);
+    fillContactAddressForm(address);
+    fillContactTelephoneForm(telephone);
+    fillContactEmailForm(email);
+    submitContactCreation();
 
+  }
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.name("selected[]"));
   }
 }

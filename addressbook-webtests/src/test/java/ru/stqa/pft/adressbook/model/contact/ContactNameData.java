@@ -4,11 +4,13 @@ public class ContactNameData {
   private final String name;
   private final String lastName;
   private String group;
+  private Boolean creation;
 
-  public ContactNameData(String name, String lastName, String Group ) {
+  public ContactNameData(String name, String lastName, String group, Boolean creation ) {
     this.name = name;
     this.lastName = lastName;
-    this.group = Group;
+    this.group = group;
+    this.creation = creation;
   }
 
   public String getName() {
@@ -22,4 +24,6 @@ public class ContactNameData {
   public String getGroup() {
     return group;
   }
+
+  public Boolean getCreation(){return creation;}
 }
