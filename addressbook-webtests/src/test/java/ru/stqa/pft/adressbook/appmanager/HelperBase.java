@@ -49,13 +49,5 @@ public class HelperBase {
     }
   }
 
-  public void waitTillDisplayed(By element, int timeout){
-    WebDriverWait wait = new WebDriverWait(wd, timeout);
-    wait.until(visibilityOfElementLocated(element));
-  }
 
-  public void waitForClick(By element, int timeout){
-    waitTillDisplayed(element,timeout);
-    click(element);
-  }
 }
