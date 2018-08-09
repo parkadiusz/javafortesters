@@ -1,5 +1,6 @@
 package ru.stqa.pft.adressbook.tests.contact;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.adressbook.model.contact.ContactAddressData;
 import ru.stqa.pft.adressbook.model.contact.ContactEmailData;
@@ -12,6 +13,7 @@ public class ContactCreationTests extends TestBase {
     @Test
     public void testContactCreation() {
 
+        int before = app.getContactHelper().getCountContacts();
         app.getNavigationHelper().gotoContactCreation();
         app.getContactHelper().createContact(
                 (new ContactNameData("Jan", "Kowalski", "zibi", true)),
@@ -20,6 +22,8 @@ public class ContactCreationTests extends TestBase {
                 (new ContactEmailData("test@test.com", "test321@o2.com", "test9@com.pl"))
         );
         app.getNavigationHelper().gotoHomePage();
+        int after = app.getContactHelper().getCountContacts();
+        Assert.assertEquals(after, before+1);
     }
 
 

@@ -59,8 +59,8 @@ public class ContactHelper extends HelperBase {
     click(By.name("update"));
   }
 
-  public void selectContact(){
-    click(By.name("selected[]"));
+  public void selectContact(int index){
+    wd.findElements(By.name("selected[]")).get(index).click(); //get bo to jest List
   }
 
   public void initContactDeletion() {
@@ -79,5 +79,9 @@ public class ContactHelper extends HelperBase {
 
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
+  }
+
+  public int getCountContacts() {
+    return wd.findElements(By.name("selected[]")).size();
   }
 }
