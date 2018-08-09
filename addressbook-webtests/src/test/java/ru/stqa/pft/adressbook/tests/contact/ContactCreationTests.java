@@ -8,12 +8,16 @@ import ru.stqa.pft.adressbook.model.contact.ContactNameData;
 import ru.stqa.pft.adressbook.model.contact.ContactTelephoneData;
 import ru.stqa.pft.adressbook.tests.TestBase;
 
+import javax.sound.midi.Soundbank;
+import java.util.List;
+
 public class ContactCreationTests extends TestBase {
 
     @Test
     public void testContactCreation() {
 
-        int before = app.getContactHelper().getCountContacts();
+        //int before = app.getContactHelper().getCountContacts();
+        List<ContactNameData> before = app.getContactHelper().getContacts();
         app.getNavigationHelper().gotoContactCreation();
         app.getContactHelper().createContact(
                 (new ContactNameData("Jan", "Kowalski", "zibi", true)),
@@ -22,8 +26,11 @@ public class ContactCreationTests extends TestBase {
                 (new ContactEmailData("test@test.com", "test321@o2.com", "test9@com.pl"))
         );
         app.getNavigationHelper().gotoHomePage();
-        int after = app.getContactHelper().getCountContacts();
-        Assert.assertEquals(after, before+1);
+        List<ContactNameData> after = app.getContactHelper().getContacts();
+        System.out.println(after.size());
+        Assert.assertEquals(after.size(), before.size()+1);
+        //int after = app.getContactHelper().getCountContacts();
+        //Assert.assertEquals(after, before+1);
     }
 
 

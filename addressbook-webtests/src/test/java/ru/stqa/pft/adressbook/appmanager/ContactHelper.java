@@ -3,12 +3,16 @@ package ru.stqa.pft.adressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.adressbook.model.contact.ContactAddressData;
 import ru.stqa.pft.adressbook.model.contact.ContactEmailData;
 import ru.stqa.pft.adressbook.model.contact.ContactNameData;
 import ru.stqa.pft.adressbook.model.contact.ContactTelephoneData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
@@ -83,5 +87,19 @@ public class ContactHelper extends HelperBase {
 
   public int getCountContacts() {
     return wd.findElements(By.name("selected[]")).size();
+  }
+
+  public List<ContactNameData> getContacts() {
+    List<ContactNameData> contacts = new ArrayList<>();
+    List<WebElement> elements = wd.findElements(By.name("entry"));
+    for (WebElement element : elements){
+      String name = element.findElement(By.xpath("td[3]")).getText();
+      //System.out.println(name);
+      String lastName = element.findElement(By.xpath("td[2]")).getText();
+      //System.out.println(lastName);
+      ContactNameData contact = new ContactNameData(name, lastName, null, null);
+      contacts.add(contact);
+    }
+    return contacts;
   }
 }
