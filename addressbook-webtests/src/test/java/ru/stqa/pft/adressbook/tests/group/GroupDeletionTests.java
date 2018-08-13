@@ -26,11 +26,11 @@ public class GroupDeletionTests extends TestBase {
         Assert.assertEquals(after.size(),before.size()-1);
         //int after = app.getGroupHelper().getCountGroup();
         //Assert.assertEquals(after, before-1);
-        before.remove(after.size()-1);
-        for(int i=0; i<before.size();i++){
-            Assert.assertEquals(before.get(i), after.get(i));
-        }
-        Assert.assertEquals(before,after);
+        before.remove(before.size()-1);
+//        for(int i=0; i<before.size();i++){ //porównuje każdy element z listy
+//            Assert.assertEquals(before.get(i), after.get(i));
+//        }
+        Assert.assertEquals(before,after); //specjalne porównanie zmiennych typu GroupData
     }
 
 

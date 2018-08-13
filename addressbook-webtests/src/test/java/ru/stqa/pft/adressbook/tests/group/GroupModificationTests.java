@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.adressbook.model.group.GroupData;
 import ru.stqa.pft.adressbook.tests.TestBase;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class GroupModificationTests extends TestBase {
@@ -19,10 +20,17 @@ public class GroupModificationTests extends TestBase {
     List<GroupData> before = app.getGroupHelper().getGroupList();
     app.getGroupHelper().selectGroup();
     app.getGroupHelper().initGroupModification();
-    app.getGroupHelper().fillGroupForm(new GroupData("zibi", "nic", "eloszka"));
+    GroupData group = new GroupData(before.get(before.size()-1).getId(), "zibi", "nic", "eloszka");
+    // nowy obiekt group z ID
+    app.getGroupHelper().fillGroupForm(group);
     app.getGroupHelper().submitGroupModification();
     app.getNavigationHelper().gotoGroupPage();
     List<GroupData> after = app.getGroupHelper().getGroupList();
+    before.remove(before.size()-1); //usuwa ostatni element z listy ponieważ jest zmieniony
+    before.add(group); // dodaje do listy zmieniony element
+
+    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+
     Assert.assertEquals(after.size(), before.size());
 
     //int after = app.getGroupHelper().getCountGroup();
