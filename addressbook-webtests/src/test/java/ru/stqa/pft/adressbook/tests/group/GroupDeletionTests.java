@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.adressbook.model.group.GroupData;
 import ru.stqa.pft.adressbook.tests.TestBase;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class GroupDeletionTests extends TestBase {
@@ -26,10 +27,13 @@ public class GroupDeletionTests extends TestBase {
         Assert.assertEquals(after.size(),before.size()-1);
         //int after = app.getGroupHelper().getCountGroup();
         //Assert.assertEquals(after, before-1);
-        before.remove(before.size()-1);
+        before.remove(0);
 //        for(int i=0; i<before.size();i++){ //porównuje każdy element z listy
 //            Assert.assertEquals(before.get(i), after.get(i));
 //        }
+        Comparator<? super GroupData> byId = (o1, o2) -> Integer.compare(o1.getId(),o2.getId());
+        before.sort(byId);
+        after.sort(byId);
         Assert.assertEquals(before,after); //specjalne porównanie zmiennych typu GroupData
     }
 

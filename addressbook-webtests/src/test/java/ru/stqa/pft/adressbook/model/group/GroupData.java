@@ -3,28 +3,34 @@ package ru.stqa.pft.adressbook.model.group;
 import java.util.Objects;
 
 public class GroupData {
-  private final String id;
+  private Integer id; //nie ma final, final jest gdy konstruktor jest stały, niezmienny
   private final String name;
   private final String header;
   private final String footer;
 
   public GroupData(String name, String header, String footer) { //sztucznie utworzona grupa z nieznany identyfikatorem
     // (IDE rozpoznaje jako dwie różne grupy GroupData
-    this.id = null;
+    this.id = 0;
     this.name = name;
     this.header = header;
     this.footer = footer;
   }
 
-  public GroupData(String id, String name, String header, String footer) {
+
+
+  public GroupData(Integer id, String name, String header, String footer) {
     this.id = id;
     this.name = name;
     this.header = header;
     this.footer = footer;
   }
 
-  public String getId() {
+  public Integer getId() {
     return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
   }
 
   public String getName() {
