@@ -21,13 +21,13 @@ public class GroupModificationTests extends TestBase {
     List<GroupData> before = app.getGroupHelper().getGroupList();
     app.getGroupHelper().selectGroup();
     app.getGroupHelper().initGroupModification();
-    GroupData group = new GroupData(before.get(before.size()-1).getId(), "zibi", "nic", "eloszka");
+    GroupData group = new GroupData(before.get(0).getId(), "zibi", "nic", "eloszka");
     // nowy obiekt group z ID
     app.getGroupHelper().fillGroupForm(group);
     app.getGroupHelper().submitGroupModification();
     app.getNavigationHelper().gotoGroupPage();
     List<GroupData> after = app.getGroupHelper().getGroupList();
-    before.remove(before.size()-1); //usuwa ostatni element z listy ponieważ jest zmieniony
+    before.remove(0); //usuwa ostatni element z listy ponieważ jest zmieniony
     before.add(group); // dodaje do listy zmieniony element
 
     //Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
