@@ -23,7 +23,7 @@ public class GroupCreationTests extends TestBase {
     //int after = app.getGroupHelper().getCountGroup();
     //Assert.assertEquals(after, before+1);
     Assert.assertEquals(after.size(), before.size()+1);
-//dodaje elementy alfabetycznie, dlatego trzeba znaleźć największe ID
+//dodaje elementy alfabetycznie, dlatego trzeba znaleźć największe ID = metoda nr 1
     int max = 0;
     for(GroupData g:after){ //pobiera ID elementu i przypisuje do zmiennej max
       if(g.getId()>max){
@@ -31,7 +31,7 @@ public class GroupCreationTests extends TestBase {
       }
     }
 
-    //lambda, strumienie, potok, funkcja max porównuje elementy z listy
+    //lambda, strumienie, potok, funkcja max porównuje elementy z listy = metoda nr 2
     int max1 = after.stream().max(((o1, o2) -> Integer.compare(o1.getId(),o2.getId())) ).get().getId();
     group.setId(max1);
     before.add(group);

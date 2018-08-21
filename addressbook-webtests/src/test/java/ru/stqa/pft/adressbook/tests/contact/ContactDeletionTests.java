@@ -8,13 +8,17 @@ import ru.stqa.pft.adressbook.model.contact.ContactNameData;
 import ru.stqa.pft.adressbook.model.contact.ContactTelephoneData;
 import ru.stqa.pft.adressbook.tests.TestBase;
 
+import java.util.Comparator;
+import java.util.List;
+
 public class ContactDeletionTests extends TestBase {
 
   @Test
   public void testContactDeletion(){
 
   app.getNavigationHelper().gotoHomePage();
-  int before = app.getContactHelper().getCountContacts();
+  //int before = app.getContactHelper().getCountContacts();
+    List<ContactNameData> before = app.getContactHelper().getContacts();
   if(! app.getContactHelper().isThereAContact()){
     app.getNavigationHelper().gotoContactCreation();
     app.getContactHelper().createContact(
@@ -25,11 +29,19 @@ public class ContactDeletionTests extends TestBase {
     );
     app.getNavigationHelper().gotoHomePage();
   }
-  app.getContactHelper().selectContact(before-1);
+
+  app.getContactHelper().selectContact(0);
   app.getContactHelper().initContactDeletion();
   app.getNavigationHelper().gotoHomePage();
-  int after = app.getContactHelper().getCountContacts();
-    Assert.assertEquals(after, before-1);
+  List<ContactNameData> after = app.getContactHelper().getContacts();
+  before.remove(0);
+    Comparator<?super ContactNameData> byId= (o1, o2) -> Integer.compare(o1.getId(),o2.getId());
+    before.sort(byId);
+    after.sort(byId);
+
+  //int after = app.getContactHelper().getCountContacts();
+    Assert.assertEquals(after, before);
+
 
   }
 }
