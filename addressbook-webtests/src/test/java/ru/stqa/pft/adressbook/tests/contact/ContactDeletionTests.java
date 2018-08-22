@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ContactDeletionTests extends TestBase {
 
-  @Test
+  @Test(groups = "Contact")
   public void testContactDeletion(){
 
   app.getNavigationHelper().gotoHomePage();

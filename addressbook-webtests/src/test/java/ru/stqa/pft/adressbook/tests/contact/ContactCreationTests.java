@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ContactCreationTests extends TestBase {
 
-    @Test
+    @Test(groups = "Contact")
     public void testContactCreation() {
 
         //int before = app.getContactHelper().getCountContacts();
