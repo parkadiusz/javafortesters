@@ -5,43 +5,28 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.adressbook.model.group.GroupData;
 import ru.stqa.pft.adressbook.tests.TestBase;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class GroupCreationTests extends TestBase {
 
   @Test
     public void testGroupCreation() {
     app.goTo().groupPage();
-    List<GroupData> before = app.groupHelper().list(); //pobierana jest Lista z grupami dlatego w asercji jest size()
-    //int before = app.groupHelper().getCountGroup(); //tutaj zliczana jest ilość grup, before i after to są tylko zmienne
+    Set<GroupData> before = app.groupHelper().all(); //teraz pobierany jest zbior
     GroupData group = new GroupData()
             .withName("nie2")
             .withFooter("test2");
     app.groupHelper().createGroup(group);
     app.goTo().returnToGroupPage();
-    List<GroupData> after = app.groupHelper().list();
-    //int after = app.groupHelper().getCountGroup();
-    //Assert.assertEquals(after, before+1);
-    Assert.assertEquals(after.size(), before.size()+1);
-//dodaje elementy alfabetycznie, dlatego trzeba znaleźć największe ID = metoda nr 1
-    int max = 0;
-    for(GroupData g:after){ //pobiera ID elementu i przypisuje do zmiennej max
-      if(g.getId()>max){
-        max=g.getId();
-      }
-    }
-
-    //lambda, strumienie, potok, funkcja max porównuje elementy z listy = metoda nr 2
-    int max1 = after.stream().max(((o1, o2) -> Integer.compare(o1.getId(),o2.getId())) ).get().getId();
-    group.setId(max1);
+    Set<GroupData> after = app.groupHelper().all();
+    //metoda nr 3 wyszukiwanie elementów w zbiorze
+    group.setId(after.stream().mapToInt(g->g.getId()).max().getAsInt());
+    //z utworzonego obiektu group wyszukujemy dane po ID.
+    //zbior (after) obiektow typu GroupData przeksztalcamy w potok,
+    // przy pomocy mapToInt przeksztalcamy w liczby calkowite za pomoca funkcji anonimowej gdzie uzyskujemy ID
+    //nastepnie wybieramy maksymalná wartosc ktora jest przeksztalcona w liczbe calkowita
     before.add(group);
-    Comparator<? super GroupData> byId = ((o1, o2) -> Integer.compare(o1.getId(),o2.getId()));
-    before.sort(byId);
-    after.sort(byId);
     Assert.assertEquals(after,before);
-    //Assert.assertEquals( new HashSet<Object>(after),new HashSet<Object>(before));
-    // HashSet juz nie jest potrzebny, teraz porównujemmy posortowame listy a nie zbiory
-  }
+  };
 
-}
+};
