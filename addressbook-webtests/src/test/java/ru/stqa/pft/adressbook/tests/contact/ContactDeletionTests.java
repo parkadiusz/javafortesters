@@ -16,30 +16,30 @@ public class ContactDeletionTests extends TestBase {
   @Test(groups = "Contact")
   public void testContactDeletion(){
 
-  app.getNavigationHelper().gotoHomePage();
-  //int before = app.getContactHelper().getCountContacts();
-    List<ContactNameData> before = app.getContactHelper().getContacts();
-  if(! app.getContactHelper().isThereAContact()){
-    app.getNavigationHelper().gotoContactCreation();
-    app.getContactHelper().createContact(
+  app.goTo().homePage();
+  //int before = app.contactHelper().getCountContacts();
+    List<ContactNameData> before = app.contactHelper().getContacts();
+  if(! app.contactHelper().isThereAContact()){
+    app.goTo().contactCreation();
+    app.contactHelper().createContact(
             (new ContactNameData("Jan", "Kowalski", "zibi", true)),
             (new ContactAddressData("Aleje Mickiewicza 12\n30-552 Kraków")),
             (new ContactTelephoneData("500500500", "600600600", "700700700", "800800800")),
             (new ContactEmailData("test@test.com", "test321@o2.com", "test9@com.pl"))
     );
-    app.getNavigationHelper().gotoHomePage();
+    app.goTo().homePage();
   }
 
-  app.getContactHelper().selectContact(0);
-  app.getContactHelper().initContactDeletion();
-  app.getNavigationHelper().gotoHomePage();
-  List<ContactNameData> after = app.getContactHelper().getContacts();
+  app.contactHelper().selectContact(0);
+  app.contactHelper().initContactDeletion();
+  app.goTo().homePage();
+  List<ContactNameData> after = app.contactHelper().getContacts();
   before.remove(0);
     Comparator<?super ContactNameData> byId= (o1, o2) -> Integer.compare(o1.getId(),o2.getId());
     before.sort(byId);
     after.sort(byId);
 
-  //int after = app.getContactHelper().getCountContacts();
+  //int after = app.contactHelper().getCountContacts();
     Assert.assertEquals(after, before);
 
 

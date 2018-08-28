@@ -16,9 +16,6 @@ public class GroupHelper extends HelperBase {
     super(wd); //zwrócenie do konstruktora w HeleprBase
   }
 
-  public void returnToGroupPage() {
-    click(By.linkText("group page"));
-  }
 
   public void submitGroupCreation() {
     click(By.name("submit"));
@@ -54,7 +51,6 @@ public class GroupHelper extends HelperBase {
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
-    returnToGroupPage();
   }
 
   public boolean isThereAGroup() {
@@ -65,13 +61,13 @@ public class GroupHelper extends HelperBase {
    return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<GroupData> getGroupList() {
+  public List<GroupData> list() {
     List<GroupData> groups = new ArrayList<GroupData>();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
     for(WebElement element : elements){
       String name = element.getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      GroupData group = new GroupData(id, name,null, null);
+      GroupData group = new GroupData().setId(id).withName(name);
       groups.add(group);
     }
     return groups;

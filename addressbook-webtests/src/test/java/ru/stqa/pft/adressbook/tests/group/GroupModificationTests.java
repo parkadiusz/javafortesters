@@ -6,27 +6,33 @@ import ru.stqa.pft.adressbook.model.group.GroupData;
 import ru.stqa.pft.adressbook.tests.TestBase;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class GroupModificationTests extends TestBase {
 
   @Test
   public void testGroupModification(){
-    app.getNavigationHelper().gotoGroupPage();
-    if(!app.getGroupHelper().isThereAGroup()){
-      app.getGroupHelper().createGroup(new GroupData("test", null, "test2"));
+    app.goTo().groupPage();
+    if(!app.groupHelper().isThereAGroup()){
+      app.groupHelper().createGroup(new GroupData()
+              .withName("test")
+              .withFooter("test2"));
+      app.goTo().returnToGroupPage();
     }
-    //int before = app.getGroupHelper().getCountGroup();
-    List<GroupData> before = app.getGroupHelper().getGroupList();
-    app.getGroupHelper().selectGroup();
-    app.getGroupHelper().initGroupModification();
-    GroupData group = new GroupData(before.get(0).getId(), "zibi", "nic", "eloszka");
+    //int before = app.groupHelper().getCountGroup();
+    List<GroupData> before = app.groupHelper().list();
+    app.groupHelper().selectGroup();
+    app.groupHelper().initGroupModification();
+    GroupData group = new GroupData()
+            .withFooter("zibi")
+            .withHeader("nic")
+            .withFooter("eloszka")
+            .setId(before.get(0).getId());
     // nowy obiekt group z ID
-    app.getGroupHelper().fillGroupForm(group);
-    app.getGroupHelper().submitGroupModification();
-    app.getNavigationHelper().gotoGroupPage();
-    List<GroupData> after = app.getGroupHelper().getGroupList();
+    app.groupHelper().fillGroupForm(group);
+    app.groupHelper().submitGroupModification();
+    app.goTo().groupPage();
+    List<GroupData> after = app.groupHelper().list();
     before.remove(0); //usuwa ostatni element z listy ponieważ jest zmieniony
     before.add(group); // dodaje do listy zmieniony element
 
@@ -37,7 +43,7 @@ public class GroupModificationTests extends TestBase {
     after.sort(byId);
     Assert.assertEquals(after, before);
 
-    //int after = app.getGroupHelper().getCountGroup();
+    //int after = app.groupHelper().getCountGroup();
     //Assert.assertEquals(after, before);
   }
 }

@@ -13,23 +13,26 @@ public class GroupDeletionTests extends TestBase {
 
   @BeforeMethod
 public void ensurePrecondition(){
-    app.getNavigationHelper().gotoGroupPage();
-    if(!app.getGroupHelper().isThereAGroup()){
-      app.getGroupHelper().createGroup(new GroupData("test", null, "test2"));
+    app.goTo().groupPage();
+    if(!app.groupHelper().isThereAGroup()){
+      app.groupHelper().createGroup(new GroupData()
+              .withName("test")
+              .withFooter("test2"));
+      app.goTo().returnToGroupPage();
     }
 
   }
 
     @Test
     public void testGroupDeletion() {
-        List<GroupData> before = app.getGroupHelper().getGroupList();
-        //int before = app.getGroupHelper().getCountGroup();
-        app.getGroupHelper().selectGroup();
-        app.getGroupHelper().deleteSelectGroups();
-        app.getGroupHelper().returnToGroupPage();
-        List<GroupData> after = app.getGroupHelper().getGroupList();
+        List<GroupData> before = app.groupHelper().list();
+        //int before = app.groupHelper().getCountGroup();
+        app.groupHelper().selectGroup();
+        app.groupHelper().deleteSelectGroups();
+        app.goTo().returnToGroupPage();
+        List<GroupData> after = app.groupHelper().list();
         Assert.assertEquals(after.size(),before.size()-1);
-        //int after = app.getGroupHelper().getCountGroup();
+        //int after = app.groupHelper().getCountGroup();
         //Assert.assertEquals(after, before-1);
         before.remove(0);
 //        for(int i=0; i<before.size();i++){ //porównuje każdy element z listy
@@ -41,7 +44,7 @@ public void ensurePrecondition(){
         Assert.assertEquals(before,after); //specjalne porównanie zmiennych typu GroupData
     }
 
-    
+
 
 
 }
