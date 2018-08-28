@@ -8,6 +8,7 @@ import ru.stqa.pft.adressbook.tests.TestBase;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class GroupDeletionTests extends TestBase {
 
@@ -25,22 +26,16 @@ public void ensurePrecondition(){
 
     @Test
     public void testGroupDeletion() {
-        List<GroupData> before = app.groupHelper().list();
+        Set<GroupData> before = app.groupHelper().all();
         //int before = app.groupHelper().getCountGroup();
-        app.groupHelper().selectGroup();
-        app.groupHelper().deleteSelectGroups();
+      GroupData deleteGroup = before.iterator().next();
+      System.out.println("delete group: " + deleteGroup);
+      //iterator grupuje zbior, next wyciaga pierwszy element.
+      app.groupHelper().delete(deleteGroup);
         app.goTo().returnToGroupPage();
-        List<GroupData> after = app.groupHelper().list();
-        Assert.assertEquals(after.size(),before.size()-1);
-        //int after = app.groupHelper().getCountGroup();
-        //Assert.assertEquals(after, before-1);
-        before.remove(0);
-//        for(int i=0; i<before.size();i++){ //porównuje każdy element z listy
-//            Assert.assertEquals(before.get(i), after.get(i));
-//        }
-        Comparator<? super GroupData> byId = (o1, o2) -> Integer.compare(o1.getId(),o2.getId());
-        before.sort(byId);
-        after.sort(byId);
+        Set<GroupData> after = app.groupHelper().all();
+
+        before.remove(deleteGroup);
         Assert.assertEquals(before,after); //specjalne porównanie zmiennych typu GroupData
     }
 

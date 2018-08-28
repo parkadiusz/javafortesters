@@ -21,7 +21,7 @@ public class GroupModificationTestsOtherMethods extends TestBase {
     }
     //int before = app.groupHelper().getCountGroup();
     List<GroupData> before = app.groupHelper().list();
-    app.groupHelper().selectGroup();
+    app.groupHelper().selectGroup(0);
     app.groupHelper().initGroupModification();
     GroupData group = new GroupData()
             .withFooter("zibi")

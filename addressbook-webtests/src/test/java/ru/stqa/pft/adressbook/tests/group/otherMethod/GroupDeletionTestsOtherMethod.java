@@ -27,7 +27,7 @@ public void ensurePrecondition(){
     public void testGroupDeletion() {
         List<GroupData> before = app.groupHelper().list();
         //int before = app.groupHelper().getCountGroup();
-        app.groupHelper().selectGroup();
+        app.groupHelper().selectGroup(0);
         app.groupHelper().deleteSelectGroups();
         app.goTo().returnToGroupPage();
         List<GroupData> after = app.groupHelper().list();
