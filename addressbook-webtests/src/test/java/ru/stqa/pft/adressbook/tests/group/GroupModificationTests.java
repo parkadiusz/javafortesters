@@ -30,7 +30,6 @@ public class GroupModificationTests extends TestBase {
             .withName("testuje")
             .withFooter("zibi")
             .withHeader("nic")
-            .withFooter("eloszka")
             .setId(modifiedGroup.getId());
     // nowy obiekt group z ID
     app.groupHelper().selectGroupById(modifiedGroup.getId());
