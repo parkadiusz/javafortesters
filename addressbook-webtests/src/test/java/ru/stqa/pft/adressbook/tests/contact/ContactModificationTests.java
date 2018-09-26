@@ -21,19 +21,19 @@ public class ContactModificationTests extends TestBase {
     if(!app.contactHelper().isThereAContact()){
       app.goTo().contactCreation();
       app.contactHelper().createContact(
-              (new ContactNameData("Jan", "Kowalski", "zibi", true)),
-              (new ContactAddressData("Aleje Mickiewicza 12\n30-552 Kraków")),
-              (new ContactTelephoneData("500500500", "600600600", "700700700", "800800800")),
-              (new ContactEmailData("test@test.com", "test321@o2.com", "test9@com.pl"))
+              (new ContactNameData().setName("Jan").setLastName("Kowalski").setGroup("zibi").setCreation(true)),
+              (new ContactAddressData().setAddress("Aleje Mickiewicza 12\n30-552 Kraków")),
+              (new ContactTelephoneData().setTel1("500500500").setTel2("600600600").setTel3("700700700").setFax("800800800")),
+              (new ContactEmailData().setEmail1("test@test.com").setEmail2("test321@o2.com").setEmail3("test9@com.pl"))
       );
       app.goTo().homePage();
     }
     app.contactHelper().initContactModification();
-    ContactNameData contact = new ContactNameData(before.get(0).getId(),"Adam", "Rokita", null,false);
+    ContactNameData contact = new ContactNameData().setId(before.get(0).getId()).setName("Adam").setLastName("Rokita").setCreation(false);
     app.contactHelper().fillContactNameForm(contact);
-    app.contactHelper().fillContactAddressForm(new ContactAddressData("Aleje Mickiewicza 15\n30-552 Kraków"));
-    app.contactHelper().fillContactTelephoneForm(new ContactTelephoneData("500500100500", "+48600600600", "+48700700700", "800800800"));
-    app.contactHelper().fillContactEmailForm(new ContactEmailData("test123@test.com", "test1@o2.com", "test19@com.pl"));
+    app.contactHelper().fillContactAddressForm(new ContactAddressData().setAddress("Aleje Mickiewicza 15\n30-552 Kraków"));
+    app.contactHelper().fillContactTelephoneForm(new ContactTelephoneData().setTel1("500500100500").setTel2("+48600600600").setTel3("+48700700700").setFax("800800800"));
+    app.contactHelper().fillContactEmailForm(new ContactEmailData().setEmail1("test123@test.com").setEmail2("test1@o2.com").setEmail3("test19@com.pl"));
     app.contactHelper().submitContactModyfication();
     app.goTo().homePage();
     //int after = app.contactHelper().getCountContacts();

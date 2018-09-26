@@ -1,15 +1,29 @@
 package ru.stqa.pft.adressbook.model.contact;
 
 public class ContactEmailData {
-  private final String email1;
-  private final String email2;
-  private final String email3;
 
-  public ContactEmailData(String email1, String email2, String email3) {
+  private String email1;
+  private String email2;
+  private String email3;
+
+
+  public ContactEmailData setEmail1(String email1) {
     this.email1 = email1;
+    return this;
+  };
+
+  public ContactEmailData setEmail2(String email2) {
     this.email2 = email2;
+    return this;
+  };
+
+
+  public ContactEmailData setEmail3(String email3) {
     this.email3 = email3;
-  }
+    return this;
+  };
+
+
 
   public String getEmail1() {
     return email1;

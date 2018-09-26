@@ -1,14 +1,20 @@
 package ru.stqa.pft.adressbook.tests.group;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.adressbook.model.group.GroupData;
+import ru.stqa.pft.adressbook.model.group.Groups;
 import ru.stqa.pft.adressbook.tests.TestBase;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
 
 public class GroupDeletionTests extends TestBase {
 
@@ -26,17 +32,18 @@ public void ensurePrecondition(){
 
     @Test
     public void testGroupDeletion() {
-        Set<GroupData> before = app.groupHelper().all();
+        Groups before = app.groupHelper().all();
         //int before = app.groupHelper().getCountGroup();
-      GroupData deleteGroup = before.iterator().next();
+      GroupData deleteGroup = (GroupData) before.iterator().next();
       System.out.println("delete group: " + deleteGroup);
       //iterator grupuje zbior, next wyciaga pierwszy element.
       app.groupHelper().delete(deleteGroup);
         app.goTo().returnToGroupPage();
-        Set<GroupData> after = app.groupHelper().all();
+        Groups after = app.groupHelper().all();
 
         before.remove(deleteGroup);
         Assert.assertEquals(before,after); //specjalne porównanie zmiennych typu GroupData
+        assertThat(after, equalTo(before.without(deleteGroup)));
     }
 
 

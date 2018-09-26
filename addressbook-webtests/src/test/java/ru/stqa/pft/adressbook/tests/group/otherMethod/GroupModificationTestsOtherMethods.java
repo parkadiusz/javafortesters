@@ -27,7 +27,7 @@ public class GroupModificationTestsOtherMethods extends TestBase {
             .withFooter("zibi")
             .withHeader("nic")
             .withFooter("eloszka")
-            .setId(before.get(0).getId());
+            .withId(before.get(0).getId());
     // nowy obiekt group z ID
     app.groupHelper().fillGroupForm(group);
     app.groupHelper().submitGroupModification();

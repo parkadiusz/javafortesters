@@ -31,10 +31,10 @@ public class ApplicationManager {
     if(browser==BrowserType.FIREFOX){
       wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
     } else if(browser==BrowserType.CHROME){
-      System.setProperty("webdriver.chrome.driver", "C://Users//arkadius.p//Desktop//java//chromedriver.exe");
-      wd = new ChromeDriver();//new ChromeOptions().setBinary("C://Users//arkadius.p//Desktop//java//chromedriver.exe"));
+      System.setProperty("webdriver.chrome.driver", "C://Users//Arkadiusz Purski//Documents//drivers//chromedriver.exe");
+      wd = new ChromeDriver();//new ChromeOptions().setBinary("C://Users//Arkadiusz Purski//Documents//drivers//chromedriver.exe"));
     } else if(browser==BrowserType.IE){
-      System.setProperty("webdriver.ie.driver", "C://Users//arkadius.p//Desktop//java//IEDriverServer.exe");
+      System.setProperty("webdriver.ie.driver", "C://Users//Arkadiusz Purski//Documents//drivers//IEDriverServer.exe");
       wd = new InternetExplorerDriver();
     }
 

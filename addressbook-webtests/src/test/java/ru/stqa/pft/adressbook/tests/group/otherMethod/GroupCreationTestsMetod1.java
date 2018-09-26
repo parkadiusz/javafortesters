@@ -7,7 +7,6 @@ import ru.stqa.pft.adressbook.tests.TestBase;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 
 public class GroupCreationTestsMetod1 extends TestBase {
 
@@ -33,7 +32,7 @@ public class GroupCreationTestsMetod1 extends TestBase {
         max = g.getId();
       }
     }
-    group.setId(max);
+    group.withId(max);
     before.add(group);
     Comparator<? super GroupData> byId = ((o1, o2) -> Integer.compare(o1.getId(), o2.getId()));
     before.sort(byId);

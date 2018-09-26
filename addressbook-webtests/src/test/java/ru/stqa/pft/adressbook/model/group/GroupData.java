@@ -1,19 +1,22 @@
 package ru.stqa.pft.adressbook.model.group;
 
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class GroupData {
-  private Integer id; //nie ma final, final jest gdy konstruktor jest stały, niezmienny
+
+
+  private int id = Integer.MAX_VALUE; //nie ma final, final jest gdy konstruktor jest stały, niezmienny
   private String name;
   private String header;
   private String footer;
 
-
-  public Integer getId() {
+  public int getId() {
     return id;
   }
 
-  public GroupData setId(Integer id) {
+
+  public GroupData withId(int id) {
     this.id = id;
     return this;
   }
@@ -53,15 +56,18 @@ public class GroupData {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
+
     GroupData groupData = (GroupData) o;
-    return Objects.equals(id, groupData.id) &&
-            Objects.equals(name, groupData.name);
+
+    if (id != groupData.id) return false;
+    return name != null ? name.equals(groupData.name) : groupData.name == null;
   }
 
   @Override
   public int hashCode() {
-
-    return Objects.hash(id, name);
+    int result = id;
+    result = 31 * result + (name != null ? name.hashCode() : 0);
+    return result;
   }
 
   @Override

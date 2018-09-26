@@ -24,7 +24,7 @@ public class GroupCreationTestsMetod2 extends TestBase {
     List<GroupData> after = app.groupHelper().list();
     //lambda, strumienie, potok, funkcja max porównuje elementy z listy = metoda nr 2
     int max1 = after.stream().max(((o1, o2) -> Integer.compare(o1.getId(),o2.getId())) ).get().getId();
-    group.setId(max1);
+    group.withId(max1);
     before.add(group);
     Comparator<? super GroupData> byId = ((o1, o2) -> Integer.compare(o1.getId(), o2.getId()));
     before.sort(byId);

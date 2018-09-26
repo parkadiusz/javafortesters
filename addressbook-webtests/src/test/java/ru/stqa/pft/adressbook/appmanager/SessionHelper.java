@@ -10,7 +10,7 @@ public class SessionHelper extends HelperBase {
   }
 
   public void login(String username, String password) {
-    wd.get("http://localhost:8081/addressbook/addressbook");
+    wd.get("http://localhost:8080/addressbook");
     type(By.name("user"),username);
     type(By.name("pass"), password);
     //wd.findElement(By.id("LoginForm")).click();
