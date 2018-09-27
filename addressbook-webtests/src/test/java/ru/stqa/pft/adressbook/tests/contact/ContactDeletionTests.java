@@ -22,7 +22,6 @@ public class ContactDeletionTests extends TestBase {
   if(! app.contactHelper().isThereAContact()){
     app.goTo().contactCreation();
     app.contactHelper().createContact(
-            (new ContactAddressData("Aleje Mickiewicza 12\n30-552 Kraków")),
             (new ContactNameData().setName("Jan").setLastName( "Kowalski").setGroup("zibi").setCreation(true)),
             (new ContactAddressData().setAddress("Aleje Mickiewicza 12\n30-552 Kraków")),
             (new ContactTelephoneData().setTel1("500500500").setTel2("600600600").setTel3("700700700").setFax("800800800")),

@@ -38,6 +38,7 @@ public class GroupModificationTests extends TestBase {
     app.groupHelper().fillGroupForm(group);
     app.groupHelper().submitGroupModification();
     app.goTo().groupPage();
+    MatcherAssert.assertThat(app.groupHelper().getCountGroup(), CoreMatchers.equalTo(before.size()));//hashCode
     Groups after = app.groupHelper().all();
     //before.remove(modifiedGroup); //usuwa element z listy ponieważ jest zmieniony
     //before.add(group); // dodaje do listy zmieniony element
