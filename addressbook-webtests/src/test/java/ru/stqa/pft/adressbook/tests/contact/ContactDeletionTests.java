@@ -13,12 +13,12 @@ import java.util.List;
 
 public class ContactDeletionTests extends TestBase {
 
-  @Test(groups = "Contact")
+  @Test(groups = "Contact", enabled = false)
   public void testContactDeletion(){
 
   app.goTo().homePage();
   //int before = app.contactHelper().getCountContacts();
-    List<ContactNameData> before = app.contactHelper().getContacts();
+    List<ContactNameData> before = app.contactHelper().all();
   if(! app.contactHelper().isThereAContact()){
     app.goTo().contactCreation();
     app.contactHelper().createContact(
@@ -33,7 +33,7 @@ public class ContactDeletionTests extends TestBase {
   app.contactHelper().selectContact(0);
   app.contactHelper().initContactDeletion();
   app.goTo().homePage();
-  List<ContactNameData> after = app.contactHelper().getContacts();
+  List<ContactNameData> after = app.contactHelper().all();
   before.remove(0);
     Comparator<?super ContactNameData> byId= (o1, o2) -> Integer.compare(o1.getId(),o2.getId());
     before.sort(byId);

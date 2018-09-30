@@ -13,10 +13,10 @@ import java.util.List;
 
 public class ContactModificationTests extends TestBase {
 
-  @Test
+  @Test (enabled = false)
   public void testContactModification(){
     app.goTo().homePage();
-    List<ContactNameData> before = app.contactHelper().getContacts();
+    List<ContactNameData> before = app.contactHelper().all();
     // int before = app.contactHelper().getCountContacts();
     if(!app.contactHelper().isThereAContact()){
       app.goTo().contactCreation();
@@ -37,7 +37,7 @@ public class ContactModificationTests extends TestBase {
     app.contactHelper().submitContactModyfication();
     app.goTo().homePage();
     //int after = app.contactHelper().getCountContacts();
-    List<ContactNameData> after = app.contactHelper().getContacts();
+    List<ContactNameData> after = app.contactHelper().all();
     before.remove(0);
     before.add(contact);
     Comparator<?super ContactNameData>byId= (o1, o2) -> Integer.compare(o1.getId(),o2.getId());
